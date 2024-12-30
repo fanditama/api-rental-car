@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class User extends Model implements Authenticatable
 {
     protected $table = "users";
     protected $primaryKey = "id";
@@ -15,9 +16,10 @@ class User extends Model
     public $incrementing = true;
 
     protected $fillable = [
+        'username',
+        'password',
         'name',
         'email',
-        'password',
         'phone',
         'role',
     ];
