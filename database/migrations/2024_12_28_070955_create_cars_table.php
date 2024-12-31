@@ -19,11 +19,11 @@ return new class extends Migration
             $table->integer('year')->nullable(false);
             $table->string('color', 100)->nullable(false);
             $table->string('image')->nullable(false);
-            $table->enum('transmision', ['AUTOMATIC', 'MANUAL']);
+            $table->enum('transmision', ['AUTOMATIC', 'MANUAL'])->default('AUTOMATIC');
             $table->integer('seat')->nullable(false);
             $table->decimal('cost_per_day')->default(0.00);
             $table->longText('location')->nullable(true);
-            $table->boolean('available')->default(true);
+            $table->enum('available', ['YES', 'NO'])->default('YES');
             $table->unsignedBigInteger('user_id')->nullable(false);
             $table->timestamps();
 
