@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthMiddleware;
 use Illuminate\Http\Request;
@@ -27,4 +28,10 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('/users/current', [UserController::class, 'get']);
     Route::patch('/users/current', [UserController::class, 'update']);
     Route::delete('/users/logout', [UserController::class, 'logout']);
+
+    Route::post('/cars', [CarController::class, 'create']);
+    Route::get('/cars', [CarController::class, 'search']);
+    Route::get('/cars/{id}', [CarController::class, 'get'])->where('id', '[0-9]+');
+    Route::put('/cars/{id}', [CarController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/cars/{id}', [CarController::class, 'delete'])->where('id', '[0-9]+');
 });
