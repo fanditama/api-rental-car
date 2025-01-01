@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthMiddleware;
@@ -34,4 +35,18 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('/cars/{id}', [CarController::class, 'get'])->where('id', '[0-9]+');
     Route::put('/cars/{id}', [CarController::class, 'update'])->where('id', '[0-9]+');
     Route::delete('/cars/{id}', [CarController::class, 'delete'])->where('id', '[0-9]+');
+
+    Route::post('/cars/{idCar}/bookings', [BookingController::class, 'create'])
+        ->where('idCar', '[0-9]+');
+    Route::get('/cars/{idCar}/bookings', [BookingController::class, 'list'])
+        ->where('idCar', '[0-9]+');
+    Route::get('/cars/{idCar}/bookings/{idBooking}', [BookingController::class, 'get'])
+        ->where('idCar', '[0-9]+')
+        ->where('idBooking', '[0-9]+');
+    Route::put('/cars/{idCar}/bookings/{idBooking}', [BookingController::class, 'update'])
+        ->where('idCar', '[0-9]+')
+        ->where('idBooking', '[0-9]+');
+    Route::delete('/cars/{idCar}/bookings/{idBooking}', [BookingController::class, 'delete'])
+        ->where('idCar', '[0-9]+')
+        ->where('idBooking', '[0-9]+');
 });
