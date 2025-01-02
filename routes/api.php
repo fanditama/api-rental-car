@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthMiddleware;
 use Illuminate\Http\Request;
@@ -49,4 +50,10 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::delete('/cars/{idCar}/bookings/{idBooking}', [BookingController::class, 'delete'])
         ->where('idCar', '[0-9]+')
         ->where('idBooking', '[0-9]+');
+    
+    Route::post('bookings/{idBooking}/payments', [PaymentController::class, 'create'])->where('idBooking', '[0-9]+');
+    Route::get('bookings/{idBooking}/payments', [PaymentController::class, 'list'])->where('idBooking', '[0-9]+');
+    Route::get('bookings/{idBooking}/payments/{idPayment}', [PaymentController::class, 'get'])->where('idBooking', '[0-9]+')->where('idPayment', '[0-9]+');
+    Route::put('bookings/{idBooking}/payments/{idPayment}', [PaymentController::class, 'update'])->where('idBooking', '[0-9]+')->where('idPayment', '[0-9]+');
+    Route::delete('bookings/{idBooking}/payments/{idPayment}', [PaymentController::class, 'delete'])->where('idBooking', '[0-9]+')->where('idPayment', '[0-9]+');
 });
